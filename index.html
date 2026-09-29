@@ -1,0 +1,1052 @@
+<title>台湾旅行フレーズ帳</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+  :root{
+    --bg:#FAF6EC;
+    --surface:#FFFDF8;
+    --surface-alt:#F1E9D8;
+    --ink:#262A1F;
+    --ink-soft:#7A755F;
+    --accent:#C8433A;
+    --accent-ink:#FFF8F5;
+    --jade:#1D7A67;
+    --jade-soft:#E3EFE9;
+    --gold:#B98A2E;
+    --border:#E4D9C2;
+    --shadow: 38 32 20;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#15170F;
+      --surface:#1F2118;
+      --surface-alt:#262819;
+      --ink:#F2ECDD;
+      --ink-soft:#A9A288;
+      --accent:#E8685D;
+      --accent-ink:#241009;
+      --jade:#3FA88F;
+      --jade-soft:#1E332C;
+      --gold:#D8AC5C;
+      --border:#35372A;
+      --shadow: 0 0 0;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#15170F;
+    --surface:#1F2118;
+    --surface-alt:#262819;
+    --ink:#F2ECDD;
+    --ink-soft:#A9A288;
+    --accent:#E8685D;
+    --accent-ink:#241009;
+    --jade:#3FA88F;
+    --jade-soft:#1E332C;
+    --gold:#D8AC5C;
+    --border:#35372A;
+    --shadow: 0 0 0;
+  }
+
+  html,body{height:100%;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Noto Sans TC', 'Hiragino Sans', system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  button{font-family:inherit;}
+
+  #app{
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    max-width:520px;
+    margin:0 auto;
+    padding-inline:16px;
+    gap:10px;
+    overflow:hidden;
+  }
+
+  /* ---------- header ---------- */
+  .topbar{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:12px;
+    padding-top:14px;
+    flex:0 0 auto;
+  }
+  .brand-title{
+    font-family:'Noto Serif TC', serif;
+    font-weight:700;
+    font-size:clamp(1.05rem, 4.2vw, 1.3rem);
+    margin:0;
+    letter-spacing:.01em;
+    text-wrap:balance;
+  }
+  .lang-switch{
+    display:flex;
+    border:1px solid var(--border);
+    border-radius:999px;
+    padding:2px;
+    background:var(--surface);
+    flex:0 0 auto;
+  }
+  .lang-switch button{
+    border:none;
+    background:transparent;
+    color:var(--ink-soft);
+    font-size:.72rem;
+    font-weight:600;
+    padding:5px 9px;
+    border-radius:999px;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .lang-switch button.active{
+    background:var(--accent);
+    color:var(--accent-ink);
+  }
+
+  /* ---------- progress ---------- */
+  .progress-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex:0 0 auto;
+  }
+  .progress-track{
+    flex:1 1 auto;
+    height:6px;
+    border-radius:999px;
+    background:var(--surface-alt);
+    overflow:hidden;
+  }
+  .progress-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg, var(--jade), var(--gold));
+    border-radius:999px;
+    transition:width .35s ease;
+  }
+  .progress-count{
+    font-family:'JetBrains Mono', monospace;
+    font-variant-numeric:tabular-nums;
+    font-size:.72rem;
+    color:var(--ink-soft);
+    flex:0 0 auto;
+  }
+  .kana-note{
+    margin:-4px 0 0;
+    font-size:.66rem;
+    color:var(--ink-soft);
+    opacity:.75;
+    flex:0 0 auto;
+  }
+
+  /* ---------- toolbar ---------- */
+  .toolbar{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    flex:0 0 auto;
+  }
+  .chip-row{
+    display:flex;
+    gap:6px;
+    overflow-x:auto;
+    padding-bottom:2px;
+    scrollbar-width:none;
+  }
+  .chip-row::-webkit-scrollbar{display:none;}
+  .chip{
+    flex:0 0 auto;
+    display:flex;
+    align-items:center;
+    gap:5px;
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--ink-soft);
+    padding:6px 11px;
+    border-radius:999px;
+    font-size:.76rem;
+    font-weight:500;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .chip svg{width:14px;height:14px;flex:0 0 auto;}
+  .chip.active{
+    background:var(--jade-soft);
+    border-color:var(--jade);
+    color:var(--jade);
+    font-weight:700;
+  }
+  .second-row{
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .status-filter{
+    display:flex;
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+    flex:0 0 auto;
+  }
+  .status-filter button{
+    border:none;
+    background:var(--surface);
+    color:var(--ink-soft);
+    font-size:.72rem;
+    font-weight:600;
+    padding:6px 9px;
+    cursor:pointer;
+    border-right:1px solid var(--border);
+  }
+  .status-filter button:last-child{border-right:none;}
+  .status-filter button.active{
+    background:var(--accent);
+    color:var(--accent-ink);
+  }
+  .search-wrap{
+    flex:1 1 auto;
+    position:relative;
+    min-width:0;
+  }
+  .search-wrap input{
+    width:100%;
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--ink);
+    border-radius:10px;
+    padding:7px 10px;
+    font-size:.8rem;
+    outline:none;
+  }
+  .search-wrap input:focus{border-color:var(--jade);}
+
+  /* ---------- stage ---------- */
+  .stage{
+    flex:1 1 auto;
+    min-height:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+  }
+  .nav-btn{
+    flex:0 0 auto;
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--ink-soft);
+    font-size:1.1rem;
+    line-height:1;
+    cursor:pointer;
+  }
+  .card-wrap{
+    flex:1 1 auto;
+    min-width:0;
+    height:100%;
+    max-height:420px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+  }
+  .deck-index{
+    font-family:'JetBrains Mono', monospace;
+    font-variant-numeric:tabular-nums;
+    font-size:.7rem;
+    color:var(--ink-soft);
+    flex:0 0 auto;
+  }
+  #cardHost{
+    flex:1 1 auto;
+    min-height:0;
+    width:100%;
+    max-width:340px;
+    max-height:340px;
+  }
+  .flashcard{
+    position:relative;
+    width:100%;
+    height:100%;
+    perspective:1400px;
+    cursor:pointer;
+  }
+  .flashcard-inner{
+    position:relative;
+    width:100%;
+    height:100%;
+    transition:transform .5s cubic-bezier(.2,.7,.3,1);
+    transform-style:preserve-3d;
+  }
+  .flashcard.flipped .flashcard-inner{transform:rotateY(180deg);}
+  .face{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    gap:10px;
+    padding:26px 22px;
+    border-radius:18px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    box-shadow:0 10px 24px rgba(var(--shadow) / .12);
+    backface-visibility:hidden;
+    overflow:hidden;
+  }
+  .face-front::before{
+    content:"";
+    position:absolute;
+    left:14px; top:14px; bottom:14px;
+    width:0;
+    border-left:2px dashed var(--border);
+  }
+  .face-front::after{
+    content:"";
+    position:absolute;
+    left:9px; top:36px;
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--bg);
+    border:1px solid var(--border);
+    box-shadow:0 60px 0 var(--bg), 0 60px 0 1px var(--border),
+               0 120px 0 var(--bg), 0 120px 0 1px var(--border),
+               0 180px 0 var(--bg), 0 180px 0 1px var(--border);
+  }
+  .face-back{transform:rotateY(180deg);}
+  .cat-tag{
+    font-size:.68rem;
+    font-weight:700;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--jade);
+    background:var(--jade-soft);
+    padding:3px 9px;
+    border-radius:999px;
+  }
+  .main-text{
+    font-family:'Noto Serif TC', serif;
+    font-weight:700;
+    font-size:clamp(1.5rem, 7vw, 2.1rem);
+    line-height:1.25;
+    text-wrap:balance;
+  }
+  .pinyin{
+    font-family:'JetBrains Mono', monospace;
+    font-size:.85rem;
+    color:var(--ink-soft);
+    min-height:1.1em;
+  }
+  .pinyin .kana{
+    font-family:'Noto Sans TC', 'Hiragino Sans', sans-serif;
+    font-size:.85rem;
+    font-weight:600;
+    color:var(--gold);
+  }
+  .speak-btn{
+    border:none;
+    background:var(--surface-alt);
+    color:var(--ink);
+    width:36px;height:36px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+  }
+  .speak-btn svg{width:16px;height:16px;}
+  .hint{
+    position:absolute;
+    bottom:10px;
+    font-size:.66rem;
+    color:var(--ink-soft);
+    opacity:.7;
+  }
+  .back-row{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:2px;
+    width:100%;
+  }
+  .back-row + .back-row{
+    border-top:1px solid var(--border);
+    padding-top:10px;
+  }
+  .back-lang-label{
+    font-size:.64rem;
+    font-weight:700;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .back-text{
+    font-family:'Noto Serif TC', serif;
+    font-weight:600;
+    font-size:clamp(1rem, 4.6vw, 1.25rem);
+  }
+  .back-actions{display:flex;align-items:center;gap:8px;}
+  .back-actions .speak-btn{width:28px;height:28px;}
+  .back-actions .speak-btn svg{width:13px;height:13px;}
+
+  .stamp{
+    position:absolute;
+    top:14px; right:14px;
+    width:64px;height:64px;
+    border:3px solid var(--accent);
+    color:var(--accent);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    text-align:center;
+    font-weight:700;
+    font-size:.62rem;
+    letter-spacing:.03em;
+    transform:rotate(-18deg) scale(0);
+    opacity:0;
+    pointer-events:none;
+    transition:transform .4s cubic-bezier(.34,1.56,.64,1), opacity .25s ease;
+    backface-visibility:hidden;
+  }
+  .stamp.show{transform:rotate(-18deg) scale(1);opacity:.92;}
+  @media (prefers-reduced-motion: reduce){
+    .flashcard-inner, .stamp{transition:none;}
+  }
+
+  .empty-state{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+    color:var(--ink-soft);
+    text-align:center;
+    padding:20px;
+  }
+  .empty-state button{
+    border:1px solid var(--jade);
+    background:var(--jade-soft);
+    color:var(--jade);
+    font-weight:700;
+    padding:7px 14px;
+    border-radius:999px;
+    cursor:pointer;
+  }
+
+  /* ---------- action bar ---------- */
+  .action-bar{
+    flex:0 0 auto;
+    display:flex;
+    gap:10px;
+    padding-block:12px;
+  }
+  .action-btn{
+    flex:1 1 0;
+    border:none;
+    border-radius:14px;
+    padding:14px 10px;
+    font-size:.92rem;
+    font-weight:700;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+  }
+  .action-btn.review{
+    background:var(--surface-alt);
+    color:var(--ink);
+    border:1px solid var(--border);
+  }
+  .action-btn.got-it{
+    background:var(--jade);
+    color:#FFFFFF;
+  }
+  .action-btn:active{transform:scale(.97);}
+
+  @media (max-width:380px){
+    .nav-btn{display:none;}
+  }
+</style>
+
+<div id="app">
+  <header class="topbar">
+    <h1 class="brand-title" id="brandTitle">台湾旅行フレーズ帳</h1>
+    <div class="lang-switch" role="group" aria-label="Display language">
+      <button data-lang="ja">日本語</button>
+      <button data-lang="zh">中文</button>
+      <button data-lang="en">EN</button>
+    </div>
+  </header>
+
+  <div class="progress-row">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="progress-count" id="progressCount">0/0</span>
+  </div>
+  <p class="kana-note" id="kanaNote"></p>
+
+  <div class="toolbar">
+    <div class="chip-row" id="categoryChips"></div>
+    <div class="second-row">
+      <div class="status-filter" id="statusFilter">
+        <button data-status="all"></button>
+        <button data-status="unlearned"></button>
+        <button data-status="learned"></button>
+      </div>
+      <div class="search-wrap">
+        <input type="search" id="searchInput" autocomplete="off">
+      </div>
+    </div>
+  </div>
+
+  <main class="stage">
+    <button class="nav-btn" id="prevBtn" aria-label="Previous">&#8249;</button>
+    <div class="card-wrap">
+      <div class="deck-index" id="deckIndex">1 / 1</div>
+      <div id="cardHost"></div>
+    </div>
+    <button class="nav-btn" id="nextBtn" aria-label="Next">&#8250;</button>
+  </main>
+
+  <footer class="action-bar">
+    <button class="action-btn review" id="reviewBtn"></button>
+    <button class="action-btn got-it" id="gotItBtn"></button>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var RAW = [
+    ["greet","你好","nǐ hǎo","こんにちは","Hello","ニーハオ"],
+    ["greet","謝謝","xiè xie","ありがとう","Thank you","シエシエ"],
+    ["greet","不客氣","bú kè qi","どういたしまして","You're welcome","ブークォチ"],
+    ["greet","不好意思","bù hǎo yì si","すみません","Excuse me","ブーハオイースー"],
+    ["greet","對不起","duì bu qǐ","ごめんなさい","I'm sorry","ドゥイブチー"],
+    ["greet","請問","qǐng wèn","お尋ねします","May I ask...?","チンウェン"],
+    ["greet","再見","zài jiàn","さようなら","Goodbye","ザイジェン"],
+    ["greet","早安","zǎo ān","おはようございます","Good morning","ザオアン"],
+    ["greet","晚安","wǎn ān","おやすみなさい","Good night","ワンアン"],
+    ["greet","是","shì","はい","Yes","シー"],
+    ["greet","不是","bú shì","いいえ","No","ブーシー"],
+    ["greet","我不會說中文","wǒ bú huì shuō zhōng wén","中国語が話せません","I can't speak Chinese","ウォーブーホイシュオジョンウェン"],
+    ["greet","你會說英文嗎?","nǐ huì shuō yīng wén ma","英語は話せますか?","Do you speak English?","ニーホイシュオインウェンマ"],
+    ["greet","我從日本來","wǒ cóng rì běn lái","日本から来ました","I'm from Japan","ウォーツォンリーベンライ"],
+    ["greet","我是日本人","wǒ shì rì běn rén","私は日本人です","I am Japanese","ウォーシーリーベンレン"],
+    ["greet","請問你叫什麼名字?","qǐng wèn nǐ jiào shén me míng zi","お名前は何とおっしゃいますか?","May I ask your name?","チンウェンニージャオシェンマミンズ"],
+    ["greet","這是你第幾次來台灣?","zhè shì nǐ dì jǐ cì lái tái wān","台湾に来たのは何回目ですか?","Is this your first time in Taiwan?","ジェシーニーディージーツーライタイワン"],
+    ["greet","這是我第一次來","zhè shì wǒ dì yī cì lái","初めてです","This is my first time","ジェシーウォーディーイーツーライ"],
+
+    ["food","請給我菜單","qǐng gěi wǒ cài dān","メニューをください","Menu, please","チンゲイウォーツァイダン"],
+    ["food","我要這個","wǒ yào zhè ge","これをください","I'd like this one","ウォーヤオジェガ"],
+    ["food","好吃","hǎo chī","おいしい","Delicious","ハオチー"],
+    ["food","不辣","bú là","辛くない","Not spicy","ブーラー"],
+    ["food","我要小辣","wǒ yào xiǎo là","少し辛めで","A little spicy, please","ウォーヤオシャオラー"],
+    ["food","結帳","jié zhàng","お会計お願いします","Check, please","ジエジャン"],
+    ["food","外帶","wài dài","持ち帰りで","To go","ワイダイ"],
+    ["food","內用","nèi yòng","店内で","For here","ネイヨン"],
+    ["food","夜市","yè shì","夜市","Night market","イエシー"],
+    ["food","有推薦的菜嗎?","yǒu tuī jiàn de cài ma","おすすめの料理はありますか?","Any recommendations?","ヨウトゥイジエンダツァイマ"],
+    ["food","洗手間在哪裡?","xǐ shǒu jiān zài nǎ lǐ","お手洗いはどこですか?","Where's the restroom?","シーショウジエンザイナーリー"],
+    ["food","請給我一份","qǐng gěi wǒ yí fèn","1つください","One, please","チンゲイウォーイーフェン"],
+    ["food","有英文菜單嗎?","yǒu yīng wén cài dān ma","英語のメニューはありますか?","Do you have an English menu?","ヨウインウェンツァイダンマ"],
+    ["food","這是什麼?","zhè shì shén me","これは何ですか?","What is this?","ジェシーシェンマ"],
+    ["food","不要香菜","bú yào xiāng cài","パクチー抜きで","No cilantro, please","ブーヤオシャンツァイ"],
+    ["food","可以續杯嗎?","kě yǐ xù bēi ma","お代わりできますか?","Can I get a refill?","カーイーシュイベイマ"],
+
+    ["transport","捷運","jié yùn","MRT(地下鉄)","MRT (subway)","ジエユン"],
+    ["transport","悠遊卡","yōu yóu kǎ","悠遊卡(交通ICカード)","EasyCard","ヨウヨウカー"],
+    ["transport","請幫我加值悠遊卡","qǐng bāng wǒ jiā zhí yōu yóu kǎ","悠遊卡にチャージをお願いします","Please top up my EasyCard","チンバンウォージャージーヨウヨウカー"],
+    ["transport","高鐵","gāo tiě","台湾新幹線","THSR (high-speed rail)","ガオティエ"],
+    ["transport","火車站","huǒ chē zhàn","駅","Train station","ホワチョージャン"],
+    ["transport","公車","gōng chē","バス","Bus","ゴンチョー"],
+    ["transport","計程車","jì chéng chē","タクシー","Taxi","ジーチェンチョー"],
+    ["transport","請到這裡","qǐng dào zhè lǐ","ここまでお願いします","Please take me here","チンダオジェリー"],
+    ["transport","多少錢?","duō shǎo qián","いくらですか?","How much is it?","ドゥオシャオチェン"],
+    ["transport","去哪裡?","qù nǎ lǐ","どこに行きますか?","Where does this go?","チュイナーリー"],
+    ["transport","下一站","xià yí zhàn","次の駅","Next stop","シャーイージャン"],
+    ["transport","車站怎麼走?","chē zhàn zěn me zǒu","駅へはどう行くのですか?","How do I get to the station?","チョージャンゼンマゾウ"],
+    ["transport","我要退費","wǒ yào tuì fèi","払い戻してください","I'd like a refund, please","ウォーヤオトゥイフェイ"],
+    ["transport","機場","jī chǎng","空港","Airport","ジーチャン"],
+
+    ["shopping","可以算便宜一點嗎?","kě yǐ suàn pián yi yì diǎn ma","まけてください","Please give me a discount","カーイースワンピエンイーイーディエンマ"],
+    ["shopping","我可以試穿嗎?","wǒ kě yǐ shì chuān ma","試着してもいいですか?","Can I try this on?","ウォーカーイーシーチュアンマ"],
+    ["shopping","有其他顏色嗎?","yǒu qí tā yán sè ma","他の色はありますか?","Do you have other colors?","ヨウチーターイェンサーマ"],
+    ["shopping","收信用卡嗎?","shōu xìn yòng kǎ ma","クレジットカードは使えますか?","Do you take credit cards?","ショウシンヨンカーマ"],
+    ["shopping","我只是看看","wǒ zhǐ shì kàn kan","見ているだけです","I'm just looking, thanks","ウォージーシーカンカン"],
+    ["shopping","可以退稅嗎?","kě yǐ tuì shuì ma","免税手続きできますか?","Can I get a tax refund?","カーイートゥイシュイマ"],
+    ["shopping","太貴了","tài guì le","高すぎます","That's too expensive","タイグイラ"],
+    ["shopping","我要這個,謝謝","wǒ yào zhè ge, xiè xie","これをください","I'll take this, thank you","ウォーヤオジェガ・シエシエ"],
+    ["shopping","收據","shōu jù","レシート","Receipt","ショウジュイ"],
+    ["shopping","打折","dǎ zhé","割引","Discount","ダージョー"],
+    ["shopping","我要","wǒ yào","いります","I need it","ウォーヤオ"],
+    ["shopping","不要","bú yào","いりません","I don't need it","ブーヤオ"],
+
+    ["stay","我有訂房","wǒ yǒu dìng fáng","予約しています","I have a reservation","ウォーヨウディンファン"],
+    ["stay","可以寄放行李嗎?","kě yǐ jì fàng xíng lǐ ma","荷物を預けられますか?","Can I store my luggage?","カーイージーファンシンリーマ"],
+    ["stay","幾點退房?","jǐ diǎn tuì fáng","チェックアウトは何時ですか?","What time is check-out?","ジーディエントゥイファン"],
+    ["stay","Wifi密碼是什麼?","wifi mì mǎ shì shén me","Wi-Fiのパスワードは?","What's the Wi-Fi password?","ワイファイミーマーシーシェンマ"],
+    ["stay","房間可以換嗎?","fáng jiān kě yǐ huàn ma","部屋を変えられますか?","Can I change rooms?","ファンジエンカーイーホワンマ"],
+    ["stay","我要多一條棉被","wǒ yào duō yì tiáo mián bèi","布団をもう一枚下さい","One more blanket, please","ウォーヤオドゥオイーティアオミエンベイ"],
+    ["stay","附近有便利商店嗎?","fù jìn yǒu biàn lì shāng diàn ma","近くにコンビニはありますか?","Is there a convenience store nearby?","フージンヨウビエンリーシャンディエンマ"],
+    ["stay","可以晚一點退房嗎?","kě yǐ wǎn yì diǎn tuì fáng ma","チェックアウトを遅らせてもらえますか?","Can I get a late check-out?","カーイーワンイーディエントゥイファン"],
+    ["stay","早餐幾點開始?","zǎo cān jǐ diǎn kāi shǐ","朝食は何時からですか?","What time does breakfast start?","ザオツァンジーディエンカイシー"],
+    ["stay","電梯在哪裡?","diàn tī zài nǎ lǐ","エレベーターはどこですか?","Where's the elevator?","ディエンティーザイナーリー"],
+    ["stay","房卡不能用了","fáng kǎ bù néng yòng le","部屋のカードキーが使えません","My room key card isn't working","ファンカーブーノンヨンラ"],
+    ["stay","我可以提前入住嗎?","wǒ kě yǐ tí qián rù zhù ma","早めにチェックインできますか?","Can I check in early?","ウォーカーイーティーチエンルーチューマ"],
+
+    ["sight","這裡可以拍照嗎?","zhè lǐ kě yǐ pāi zhào ma","ここで写真を撮ってもいいですか?","Can I take photos here?","ジェリーカーイーパイジャオマ"],
+    ["sight","可以幫我拍照嗎?","kě yǐ bāng wǒ pāi zhào ma","写真を撮ってもらえますか?","Could you take a photo of me?","カーイーバンウォーパイジャオマ"],
+    ["sight","廟","miào","お寺・廟","Temple","ミャオ"],
+    ["sight","入場費多少?","rù chǎng fèi duō shǎo","入場料はいくらですか?","How much is admission?","ルーチャンフェイドゥオシャオ"],
+    ["sight","洗手間在哪裡?","xǐ shǒu jiān zài nǎ lǐ","お手洗いはどこですか?","Where's the restroom?","シーショウジエンザイナーリー"],
+    ["sight","展望台","zhǎn wàng tái","展望台","Observation deck","ジャンワンタイ"],
+    ["sight","紀念品店","jì niàn pǐn diàn","お土産屋","Souvenir shop","ジーニエンピンディエン"],
+    ["sight","今天休息嗎?","jīn tiān xiū xi ma","今日は休みですか?","Is it closed today?","ジンティエンシウシーマ"],
+
+    ["emergency","救命!","jiù mìng","助けて!","Help!","ジウミン"],
+    ["emergency","我迷路了","wǒ mí lù le","道に迷いました","I'm lost","ウォーミールーラ"],
+    ["emergency","我的護照不見了","wǒ de hù zhào bú jiàn le","パスポートをなくしました","I lost my passport","ウォーダフージャオブージエンラ"],
+    ["emergency","請叫救護車","qǐng jiào jiù hù chē","救急車を呼んでください","Please call an ambulance","チンジャオジウフーチョー"],
+    ["emergency","我身體不舒服","wǒ shēn tǐ bù shū fu","具合が悪いです","I don't feel well","ウォーシェンティーブーシューフ"],
+    ["emergency","最近的警察局在哪裡?","zuì jìn de jǐng chá jú zài nǎ lǐ","最寄りの警察署はどこですか?","Where's the nearest police station?","ズイジンダジンチャージュイザイナーリー"],
+    ["emergency","附近有藥局嗎?","fù jìn yǒu yào jú ma","近くに薬局はありますか?","Is there a pharmacy nearby?","フージンヨウヤオジュイマ"],
+    ["emergency","可以借一下手機嗎?","kě yǐ jiè yí xià shǒu jī ma","携帯を貸してもらえますか?","Could I borrow your phone?","カーイージエイーシャーショウジーマ"],
+    ["emergency","請說慢一點","qǐng shuō màn yì diǎn","ゆっくり話してください","Please speak slowly","チンショウマンイーディエン"],
+    ["emergency","請再說一次","qǐng zài shuō yí cì","もう一度言ってください","Please say that again","チンザイショウイーツー"],
+    ["emergency","附近有醫院嗎?","fù jìn yǒu yī yuàn ma","近くに病院はありませんか?","Is there a hospital nearby?","フージンヨウイーユエンマ"],
+
+    ["numbers","一","yī","1(いち)","One","イー"],
+    ["numbers","二","èr","2(に)","Two","アル"],
+    ["numbers","三","sān","3(さん)","Three","サン"],
+    ["numbers","四","sì","4(よん)","Four","スー"],
+    ["numbers","五","wǔ","5(ご)","Five","ウー"],
+    ["numbers","六","liù","6(ろく)","Six","リョウ"],
+    ["numbers","七","qī","7(なな)","Seven","チー"],
+    ["numbers","八","bā","8(はち)","Eight","バー"],
+    ["numbers","九","jiǔ","9(きゅう)","Nine","ジウ"],
+    ["numbers","十","shí","10(じゅう)","Ten","シー"],
+    ["numbers","今天","jīn tiān","今日","Today","ジンティエン"],
+    ["numbers","明天","míng tiān","明日","Tomorrow","ミンティエン"],
+
+    ["useful","有","yǒu","あります・います","There is / I have","ヨウ"],
+    ["useful","沒有","méi yǒu","ありません","There isn't / I don't have","メイヨウ"],
+    ["useful","這個","zhè ge","これ","This","ジェガ"],
+    ["useful","那個","nà ge","それ・あれ","That","ナーガ"],
+    ["useful","大","dà","大きい","Big","ダー"],
+    ["useful","小","xiǎo","小さい","Small","シャオ"],
+    ["useful","多","duō","多い","A lot","ドゥオ"],
+    ["useful","少","shǎo","少ない","A little","シャオ"],
+    ["useful","貴","guì","(値段が)高い","Expensive","グイ"],
+    ["useful","便宜","pián yi","安い","Cheap","ピエンイー"],
+    ["useful","慢","màn","ゆっくり","Slow","マン"],
+    ["useful","快","kuài","速い","Fast","クアイ"],
+    ["useful","左邊","zuǒ biān","左","Left","ズオビエン"],
+    ["useful","右邊","yòu biān","右","Right","ヨウビエン"],
+    ["useful","直走","zhí zǒu","まっすぐ","Go straight","ジーゾウ"],
+    ["useful","這裡","zhè lǐ","ここ","Here","ジェリー"],
+    ["useful","那裡","nà lǐ","あそこ・そこ","There","ナーリー"],
+
+    ["useful","入口","rù kǒu","入口","Entrance","ルーコウ"],
+    ["useful","出口","chū kǒu","出口","Exit","チューコウ"],
+    ["useful","廁所","cè suǒ","トイレ(標識)","Restroom (sign)","ツォスオ"],
+    ["useful","男","nán","男性(トイレ表示)","Men","ナン"],
+    ["useful","女","nǚ","女性(トイレ表示)","Women","ニュイ"],
+    ["useful","推","tuī","押す(ドア)","Push","トゥイ"],
+    ["useful","拉","lā","引く(ドア)","Pull","ラー"],
+    ["useful","營業中","yíng yè zhōng","営業中","Open (sign)","インイエジョン"],
+    ["useful","公休","gōng xiū","定休日","Closed (regular holiday)","ゴンシウ"],
+    ["useful","禁止吸菸","jìn zhǐ xī yān","禁煙","No smoking","ジンジーシーイェン"],
+    ["useful","路","lù","〜路(道)","Road","ルー"],
+    ["useful","街","jiē","〜街","Street","ジエ"],
+    ["useful","巷","xiàng","〜巷(路地)","Lane","シャン"],
+    ["useful","樓","lóu","〜階","Floor","ロウ"],
+    ["useful","客運","kè yùn","長距離バス","Intercity bus","クァユン"],
+    ["useful","加值","jiā zhí","チャージ(交通系ICカード)","Top-up (transit card)","ジャージー"],
+    ["useful","珍珠奶茶","zhēn zhū nǎi chá","タピオカミルクティー","Bubble milk tea","ジェンジューナイチャー"],
+    ["useful","小吃","xiǎo chī","屋台グルメ・軽食","Street food / snacks","シャオチー"],
+    ["useful","老街","lǎo jiē","老街(古い町並み)","Old street","ラオジエ"],
+    ["useful","統一發票","tǒng yī fā piào","統一發票(宝くじ付きレシート)","Uniform invoice (lottery receipt)","トンイーファーピャオ"],
+    ["useful","檳榔","bīng láng","ビンロウ(嗜好品)","Betel nut","ビンラン"],
+    ["useful","森林小火車","sēn lín xiǎo huǒ chē","阿里山森林小火車","Alishan Forest Railway","センリンシャオホワチョー"],
+    ["useful","日出","rì chū","ご来光・日の出","Sunrise","リーチュー"],
+    ["useful","雲海","yún hǎi","雲海","Sea of clouds","ユンハイ"],
+    ["useful","步道","bù dào","遊歩道","Trail","ブーダオ"]
+  ];
+
+  var WORDS = RAW.map(function(r, i){
+    return {id:"w"+i, cat:r[0], zh:r[1], py:r[2], ja:r[3], en:r[4], kana:r[5]};
+  });
+
+  var CATEGORIES = [
+    {id:"greet", ja:"挨拶・基本", zh:"問候與基本", en:"Greetings", icon:"chat"},
+    {id:"food", ja:"食事", zh:"飲食", en:"Food", icon:"bowl"},
+    {id:"transport", ja:"交通", zh:"交通", en:"Transport", icon:"train"},
+    {id:"shopping", ja:"買い物", zh:"購物", en:"Shopping", icon:"bag"},
+    {id:"stay", ja:"宿泊", zh:"住宿", en:"Stay", icon:"bed"},
+    {id:"sight", ja:"観光", zh:"觀光", en:"Sightseeing", icon:"camera"},
+    {id:"emergency", ja:"緊急", zh:"緊急狀況", en:"Emergency", icon:"alert"},
+    {id:"numbers", ja:"数字・日付", zh:"數字與日期", en:"Numbers", icon:"hash"},
+    {id:"useful", ja:"便利な単語", zh:"實用單字", en:"Useful Words", icon:"sparkle"}
+  ];
+
+  var ICONS = {
+    chat:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="4" width="15" height="10" rx="3"/><path d="M6 14v3l4-3"/></svg>',
+    bowl:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9h14a7 7 0 0 1-14 0Z"/><path d="M6 9V5"/><path d="M10 9V4"/><path d="M14 9V5"/></svg>',
+    train:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="3" width="12" height="11" rx="3"/><line x1="4" y1="9" x2="16" y2="9"/><circle cx="7" cy="12" r=".6" fill="currentColor"/><circle cx="13" cy="12" r=".6" fill="currentColor"/><path d="M6 17l-1.5 2M14 17l1.5 2"/></svg>',
+    bag:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 7h10l-1 10H6L5 7Z"/><path d="M7.5 7V5.5a2.5 2.5 0 0 1 5 0V7"/></svg>',
+    bed:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.5 15V8a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 9.5 8v2"/><path d="M9.5 10h5a2 2 0 0 1 2 2v3"/><line x1="2.5" y1="15" x2="17.5" y2="15"/><circle cx="5" cy="8" r="1"/></svg>',
+    camera:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="6" width="15" height="10" rx="2"/><path d="M7 6l1.2-2h3.6L13 6"/><circle cx="10" cy="11" r="3"/></svg>',
+    alert:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 3 2 16h16L10 3Z"/><line x1="10" y1="8.5" x2="10" y2="12"/><circle cx="10" cy="14.2" r=".6" fill="currentColor"/></svg>',
+    hash:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="7" y1="3" x2="5" y2="17"/><line x1="14" y1="3" x2="12" y2="17"/><line x1="3" y1="8" x2="17" y2="8"/><line x1="2.4" y1="13" x2="16.4" y2="13"/></svg>',
+    sparkle:'<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="10" y1="2" x2="10" y2="18"/><line x1="3.5" y1="6" x2="16.5" y2="14"/><line x1="16.5" y1="6" x2="3.5" y2="14"/></svg>'
+  };
+
+  var SPEAK_ICON = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8v4h3l4 3V5L6 8H3Z"/><path d="M13 7.5a3 3 0 0 1 0 5"/><path d="M15.3 5.5a6.2 6.2 0 0 1 0 9"/></svg>';
+
+  var STR = {
+    ja:{
+      title:"台湾旅行フレーズ帳",
+      statusAll:"すべて", statusUnlearned:"未習得", statusLearned:"習得済み",
+      searchPh:"単語やフレーズを検索",
+      review:"もう一度", gotIt:"覚えた",
+      emptyTitle:"該当するカードがありません", emptyBody:"検索やフィルターを変えてみてください",
+      resetFilters:"フィルターをリセット",
+      hint:"タップしてめくる / 左右スワイプで移動",
+      kanaNote:"※カタカナ発音は目安です。実際の発音とは異なります",
+      stamp:"覚えた!",
+      langNames:{ja:"日本語", zh:"中国語", en:"英語"}
+    },
+    zh:{
+      title:"台灣旅遊單字卡",
+      statusAll:"全部", statusUnlearned:"尚未學會", statusLearned:"已學會",
+      searchPh:"搜尋單字或短語",
+      review:"再複習", gotIt:"已學會",
+      emptyTitle:"沒有符合的卡片", emptyBody:"請試試調整搜尋或篩選條件",
+      resetFilters:"重設篩選",
+      hint:"點一下翻面 / 左右滑動切換",
+      kanaNote:"※片假名發音僅供參考,與實際發音略有不同",
+      stamp:"已學會!",
+      langNames:{ja:"日文", zh:"中文", en:"英文"}
+    },
+    en:{
+      title:"Taiwan Travel Phrasebook",
+      statusAll:"All", statusUnlearned:"To learn", statusLearned:"Learned",
+      searchPh:"Search words or phrases",
+      review:"Review again", gotIt:"Got it",
+      emptyTitle:"No cards match", emptyBody:"Try changing your search or filters",
+      resetFilters:"Reset filters",
+      hint:"Tap to flip / swipe to move",
+      kanaNote:"* Katakana readings are approximate, not exact pronunciation",
+      stamp:"Got it!",
+      langNames:{ja:"Japanese", zh:"Chinese", en:"English"}
+    }
+  };
+
+  var LS_PROGRESS = "twflash_progress_v1";
+  var LS_PREFS = "twflash_prefs_v1";
+
+  var state = {
+    lang: "ja",
+    category: "all",
+    status: "all",
+    query: "",
+    index: 0,
+    flipped: false,
+    learned: {}
+  };
+
+  try{
+    var savedPrefs = JSON.parse(localStorage.getItem(LS_PREFS) || "{}");
+    if (savedPrefs.lang) state.lang = savedPrefs.lang;
+  }catch(e){}
+  try{
+    state.learned = JSON.parse(localStorage.getItem(LS_PROGRESS) || "{}");
+  }catch(e){}
+
+  function saveProgress(){
+    try{ localStorage.setItem(LS_PROGRESS, JSON.stringify(state.learned)); }catch(e){}
+  }
+  function savePrefs(){
+    try{ localStorage.setItem(LS_PREFS, JSON.stringify({lang:state.lang})); }catch(e){}
+  }
+
+  var deck = [];
+
+  function normalize(s){ return (s||"").toLowerCase(); }
+
+  function computeDeck(){
+    var q = normalize(state.query.trim());
+    deck = WORDS.filter(function(w){
+      if (state.category !== "all" && w.cat !== state.category) return false;
+      var isLearned = !!state.learned[w.id];
+      if (state.status === "learned" && !isLearned) return false;
+      if (state.status === "unlearned" && isLearned) return false;
+      if (q){
+        var hay = normalize(w.zh + " " + w.py + " " + w.ja + " " + w.en);
+        if (hay.indexOf(q) === -1) return false;
+      }
+      return true;
+    });
+    if (state.index >= deck.length) state.index = 0;
+    if (state.index < 0) state.index = 0;
+  }
+
+  var els = {};
+  ["categoryChips","statusFilter","searchInput","cardHost","deckIndex",
+   "prevBtn","nextBtn","reviewBtn","gotItBtn","progressFill","progressCount","brandTitle","kanaNote"]
+   .forEach(function(id){ els[id] = document.getElementById(id); });
+
+  function renderChrome(){
+    var t = STR[state.lang];
+    document.title = t.title;
+    els.brandTitle.textContent = t.title;
+    document.querySelectorAll(".lang-switch button").forEach(function(b){
+      b.classList.toggle("active", b.dataset.lang === state.lang);
+    });
+
+    els.categoryChips.innerHTML = ['<button class="chip'+(state.category==="all"?" active":"")+'" data-cat="all">'+
+        (state.lang==="ja"?"すべて":state.lang==="zh"?"全部":"All")+'</button>']
+      .concat(CATEGORIES.map(function(c){
+        return '<button class="chip'+(state.category===c.id?" active":"")+'" data-cat="'+c.id+'">'+
+          ICONS[c.icon] + '<span>' + c[state.lang] + '</span></button>';
+      })).join("");
+
+    els.statusFilter.innerHTML =
+      '<button data-status="all" class="'+(state.status==="all"?"active":"")+'">'+t.statusAll+'</button>'+
+      '<button data-status="unlearned" class="'+(state.status==="unlearned"?"active":"")+'">'+t.statusUnlearned+'</button>'+
+      '<button data-status="learned" class="'+(state.status==="learned"?"active":"")+'">'+t.statusLearned+'</button>';
+
+    els.searchInput.placeholder = t.searchPh;
+    els.reviewBtn.textContent = t.review;
+    els.gotItBtn.textContent = t.gotIt;
+    els.kanaNote.textContent = t.kanaNote;
+  }
+
+  function escapeAttr(s){
+    return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+  }
+
+  function langCode(l){
+    return l==="zh" ? "zh-TW" : l==="ja" ? "ja-JP" : "en-US";
+  }
+
+  function speakBtnHtml(text, lang, size){
+    return '<button class="speak-btn" data-action="speak" data-text="'+escapeAttr(text)+'" data-code="'+langCode(lang)+'" aria-label="play">'+SPEAK_ICON+'</button>';
+  }
+
+  function pinyinHtml(w){
+    return w.py + ' <span class="kana">・' + w.kana + '</span>';
+  }
+
+  function renderCard(){
+    var t = STR[state.lang];
+
+    if (!deck.length){
+      els.deckIndex.textContent = "0 / 0";
+      els.cardHost.innerHTML =
+        '<div class="empty-state" style="width:280px;max-width:100%;">'+
+          '<strong>'+t.emptyTitle+'</strong>'+
+          '<span>'+t.emptyBody+'</span>'+
+          '<button id="resetFiltersBtn">'+t.resetFilters+'</button>'+
+        '</div>';
+      var rb = document.getElementById("resetFiltersBtn");
+      if (rb) rb.addEventListener("click", function(){
+        state.category = "all"; state.status = "all"; state.query = "";
+        els.searchInput.value = "";
+        computeDeck(); renderChrome(); renderCard(); updateProgress();
+      });
+      return;
+    }
+
+    var w = deck[state.index];
+    var cat = CATEGORIES.filter(function(c){ return c.id === w.cat; })[0];
+    els.deckIndex.textContent = (state.index+1) + " / " + deck.length;
+
+    var order = ["ja","zh","en"].filter(function(l){ return l !== state.lang; });
+
+    var frontText = w[state.lang];
+    var frontPinyin = state.lang === "zh" ? pinyinHtml(w) : "";
+
+    var backRows = order.map(function(l){
+      var text = w[l];
+      var pinyin = l === "zh" ? '<div class="pinyin">'+pinyinHtml(w)+'</div>' : "";
+      return '<div class="back-row">'+
+          '<span class="back-lang-label">'+t.langNames[l]+'</span>'+
+          '<span class="back-text">'+text+'</span>'+
+          pinyin+
+          '<div class="back-actions">'+speakBtnHtml(text, l)+'</div>'+
+        '</div>';
+    }).join("");
+
+    els.cardHost.innerHTML =
+      '<div class="flashcard'+(state.flipped?" flipped":"")+'" id="flashcard">'+
+        '<div class="flashcard-inner">'+
+          '<div class="face face-front">'+
+            '<span class="cat-tag">'+(cat ? cat[state.lang] : "")+'</span>'+
+            '<div class="main-text">'+frontText+'</div>'+
+            (frontPinyin ? '<div class="pinyin">'+frontPinyin+'</div>' : '<div class="pinyin"></div>')+
+            speakBtnHtml(frontText, state.lang)+
+            '<span class="hint">'+t.hint+'</span>'+
+          '</div>'+
+          '<div class="face face-back">'+
+            backRows+
+          '</div>'+
+        '</div>'+
+        '<div class="stamp" id="stampMark">'+t.stamp+'</div>'+
+      '</div>';
+
+    bindCardEvents();
+  }
+
+  function updateProgress(){
+    var total = WORDS.length;
+    var learnedCount = WORDS.filter(function(w){ return !!state.learned[w.id]; }).length;
+    els.progressFill.style.width = (total ? (learnedCount/total*100) : 0) + "%";
+    els.progressCount.textContent = learnedCount + "/" + total;
+  }
+
+  var touchStartX=0, touchStartY=0, swiped=false;
+
+  function bindCardEvents(){
+    var card = document.getElementById("flashcard");
+    if (!card) return;
+
+    card.addEventListener("click", function(e){
+      if (swiped){ swiped = false; return; }
+      var speakBtn = e.target.closest && e.target.closest('[data-action="speak"]');
+      if (speakBtn){
+        e.stopPropagation();
+        speak(speakBtn.dataset.text, speakBtn.dataset.code);
+        return;
+      }
+      state.flipped = !state.flipped;
+      card.classList.toggle("flipped", state.flipped);
+    });
+
+    card.addEventListener("touchstart", function(e){
+      var t = e.changedTouches[0];
+      touchStartX = t.clientX; touchStartY = t.clientY;
+    }, {passive:true});
+
+    card.addEventListener("touchend", function(e){
+      var t = e.changedTouches[0];
+      var dx = t.clientX - touchStartX, dy = t.clientY - touchStartY;
+      if (Math.abs(dx) > 50 && Math.abs(dy) < 60){
+        swiped = true;
+        dx < 0 ? goNext() : goPrev();
+      }
+    }, {passive:true});
+  }
+
+  function speak(text, code){
+    if (!("speechSynthesis" in window)) return;
+    try{
+      window.speechSynthesis.cancel();
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = code;
+      u.rate = 0.95;
+      window.speechSynthesis.speak(u);
+    }catch(e){}
+  }
+
+  function goNext(){
+    if (!deck.length) return;
+    state.index = (state.index + 1) % deck.length;
+    state.flipped = false;
+    renderCard();
+  }
+  function goPrev(){
+    if (!deck.length) return;
+    state.index = (state.index - 1 + deck.length) % deck.length;
+    state.flipped = false;
+    renderCard();
+  }
+
+  function mark(isLearned){
+    if (!deck.length) return;
+    var w = deck[state.index];
+    state.learned[w.id] = isLearned;
+    saveProgress();
+    updateProgress();
+
+    var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (isLearned){
+      var stamp = document.getElementById("stampMark");
+      if (stamp) stamp.classList.add("show");
+      setTimeout(advanceAfterMark, reduceMotion ? 120 : 480);
+    } else {
+      advanceAfterMark();
+    }
+  }
+
+  function advanceAfterMark(){
+    var currentId = deck[state.index] ? deck[state.index].id : null;
+    computeDeck();
+    var pos = currentId ? deck.findIndex(function(w){ return w.id === currentId; }) : -1;
+    if (!deck.length){
+      state.index = 0;
+    } else if (pos >= 0){
+      state.index = (pos + 1) % deck.length;
+    } else {
+      state.index = Math.min(state.index, deck.length - 1);
+    }
+    state.flipped = false;
+    renderCard();
+  }
+
+  els.categoryChips.addEventListener("click", function(e){
+    var btn = e.target.closest("[data-cat]");
+    if (!btn) return;
+    state.category = btn.dataset.cat;
+    state.index = 0; state.flipped = false;
+    computeDeck(); renderChrome(); renderCard();
+  });
+
+  els.statusFilter.addEventListener("click", function(e){
+    var btn = e.target.closest("[data-status]");
+    if (!btn) return;
+    state.status = btn.dataset.status;
+    state.index = 0; state.flipped = false;
+    computeDeck(); renderChrome(); renderCard();
+  });
+
+  els.searchInput.addEventListener("input", function(e){
+    state.query = e.target.value;
+    state.index = 0; state.flipped = false;
+    computeDeck(); renderCard();
+  });
+
+  document.querySelectorAll(".lang-switch button").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      state.lang = btn.dataset.lang;
+      state.flipped = false;
+      savePrefs();
+      renderChrome(); renderCard();
+    });
+  });
+
+  els.prevBtn.addEventListener("click", goPrev);
+  els.nextBtn.addEventListener("click", goNext);
+  els.reviewBtn.addEventListener("click", function(){ mark(false); });
+  els.gotItBtn.addEventListener("click", function(){ mark(true); });
+
+  function start(){
+    computeDeck();
+    renderChrome();
+    renderCard();
+    updateProgress();
+  }
+
+  if (window.claude && window.claude.hot){
+    window.claude.hot.ready ? window.claude.hot.ready(start) : start();
+  } else {
+    start();
+  }
+})();
+</script>
